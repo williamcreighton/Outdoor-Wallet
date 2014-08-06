@@ -52,8 +52,8 @@ var AppRouter = Parse.Router.extend({
 	userDashboard: function(){
 		$('.content').html('');
 			// enforceAuthenticated: function(){
-			// 	if ! (Parse.User.current()) {
-			// 		router.navigate('', {trigger:false});
+			// 	if ! Parse.User.current(){
+			// 		router.navigate('', {trigger:true});
 			// 	} else {
 			// 		new UserDashboardPage();
 			// 	}

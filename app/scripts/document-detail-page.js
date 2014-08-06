@@ -16,18 +16,17 @@ var DocumentDetailPage = Parse.View.extend({
 
   initialize: function(options){
     var id = options.id;
-    // see the initialize function for user-dashboard-page as well
-    // as the notecard from JS regarding the get method here.
-    // Parse.User.current().relation('documents').query().find().done(function(documents){
-    //   that.collection = new Parse.Collection(documents);
-    //   that.render();
-    // }); --> use get instead of find.
+    
     $('.content').append(this.el);
-    this.render();
+    var that = this;
+    Parse.User.current().relation('documents').query().get(id).done(function(doc){
+      that.model = doc || new Parse.Object();
+      that.render();
+    });
   },
 
   render: function(){
-    var renderedTemplate = this.template;
+    var renderedTemplate = this.template(this.model.attributes);
     this.$el.html(renderedTemplate);
   },
 
