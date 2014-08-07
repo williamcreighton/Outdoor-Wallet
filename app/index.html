@@ -61,6 +61,8 @@
     <div class="content">
       <div class="documents-container"></div>
     </div>
+    
+    
 
     <!-- <div class="container">
       <footer>
@@ -241,14 +243,14 @@
           </div> 
         <% } else { %>
         <% _.each(collection, function(doc){ %>
-          <div class="row">
-            <div class="col-lg-12"></div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a class="thumbnail" href="#/document/<%=doc.objectId%>">
-              <img class="img-responsive" src="<%=doc.docURL%>">
-              </a>
+          <li><a class="thumbnail" href="#/document/<%=doc.objectId%>">
+            <img class="img-responsive" src="<%=doc.docURL%>">
+            <div class="caption">
+            <p><%= doc.CardType %></p>
             </div>
-          </div>
+            </a>
+
+          </li>
         <% })} %>
       </div>
     </script>
@@ -390,11 +392,11 @@
 
     <script type="text/template" class="document-detail-template">
       <div class="documents-thumbnail">
-          <img class="img-responsive" src="<%=docURL%>">
-        </div>
-        <div class="delete-document">
-          <i class="fa fa-trash-o fa-2x delete-document-btn"></i>
-        </div>
+        <img class="img-responsive" src="<%=docURL%>">
+      </div>
+      <div class="delete-document">
+        <i class="fa fa-trash-o fa-2x delete-document-btn"></i>
+      </div>
     </script>
 
     <!-- User Settings Page Template -->
