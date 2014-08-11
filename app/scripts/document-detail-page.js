@@ -19,8 +19,8 @@ var DocumentDetailPage = Parse.View.extend({
     
     $('.content').append(this.el);
     var that = this;
-    Parse.User.current().relation('documents').query().get(id).done(function(doc){
-      that.model = doc || new Parse.Object();
+    Parse.User.current().relation('documents').query().get(id).then(function(doc){
+      that.model = doc;
       that.render();
     });
   },
@@ -32,7 +32,6 @@ var DocumentDetailPage = Parse.View.extend({
 
   deleteDocument: function(){
     this.model.destroy();
-    this.model = new Parse.Object();
-    this.render();
-  }
+    router.navigate('#/document-upload', {trigger:true});
+   }
 });

@@ -14,7 +14,7 @@ var AppRouter = Parse.Router.extend({
 		'dashboard' : 'userDashboard',
 		'document-upload' : 'documentUpload',
 		'document/:id' : 'documentDetail',
-		'my-account' : 'userSettings'
+		// 'my-account' : 'userSettings'
 	},
 
 	initialize: function(){
@@ -30,8 +30,12 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	landingPage: function(){
-		$('.content').html('');
-		new LandingPage();
+		if (Parse.User.current()){
+	    router.navigate('#/dashboard', {trigger: true});
+	  } else {
+	    $('.content').html('');
+	    new LandingPage();
+	  }  
 	},
 
 	userSignUp: function(){
@@ -50,25 +54,40 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	userDashboard: function(){
-		$('.content').html('');
-		new UserDashboardPage();
+		if (Parse.User.current()){
+	    $('.content').html('');
+	    new UserDashboardPage();
+	  } else {
+	    router.navigate('', {trigger: true});
+	  } 
 	},
 
 	documentUpload: function(){
-		$('.content').html('');
-		new DocumentUploadPage();
+		if (Parse.User.current()){
+	    $('.content').html('');
+	    new DocumentUploadPage();
+	  } else {
+	    router.navigate('', {trigger: true});
+	  }
 	},
 
 	documentDetail: function(id){
-		$('.content').html('');
-		console.log(id);
-		new DocumentDetailPage({id: id});
+		if (Parse.User.current()){
+			$('.content').html('');
+	    new DocumentDetailPage({id: id});
+	  } else {
+	    router.navigate('', {trigger: true});
+	  }
 	},
 
-	userSettings: function(){
-		$('.content').html('');
-		new UserSettingsPage();
-	}
+	// userSettings: function(){
+	// 	if (Parse.User.current()){
+	// 		$('.content').html('');
+	//     new UserSettingsPage();
+	//   } else {
+	//     router.navigate('', {trigger: true});
+	//   }
+	// },
 });
 
 var router = new AppRouter();
